@@ -1,0 +1,397 @@
+/* ===== SPEAKERS SECTION ===== */
+
+/* ===== SPEAKERS GRID ===== */
+.speakers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+/* ===== SPEAKER CARD ===== */
+.speaker-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border-radius: 20px;
+  padding: 16px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.speaker-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(230, 43, 30, 0.02), transparent 50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.speaker-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 0 1px rgba(230, 43, 30, 0.1);
+}
+
+.speaker-card:hover::before {
+  opacity: 1;
+}
+
+/* ===== SPEAKER IMAGE ===== */
+.speaker-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.speaker-card:hover .speaker-image {
+  border-color: rgba(230, 43, 30, 0.3);
+  transform: scale(1.05);
+}
+
+/* ===== SPEAKER INFO ===== */
+.speaker-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.speaker-name {
+  font-weight: 700;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  color: var(--white);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.speaker-role {
+  color: var(--muted);
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
+  font-weight: 500;
+  margin: 0;
+}
+
+.speaker-talk {
+  color: var(--muted);
+  font-size: clamp(0.75rem, 1.8vw, 0.8rem);
+  line-height: 1.4;
+  margin: 4px 0 0 0;
+  opacity: 0.8;
+}
+
+/* ===== BIO BUTTON ===== */
+.bio-button {
+  background: linear-gradient(
+    135deg,
+    rgba(230, 43, 30, 0.15) 0%,
+    rgba(230, 43, 30, 0.08) 100%
+  );
+  border: 1px solid rgba(230, 43, 30, 0.2);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: clamp(0.75rem, 1.8vw, 0.8rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(10px);
+  align-self: center;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.bio-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(230, 43, 30, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.bio-button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(230, 43, 30, 0.25) 0%,
+    rgba(230, 43, 30, 0.15) 100%
+  );
+  border-color: rgba(230, 43, 30, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(230, 43, 30, 0.2);
+}
+
+.bio-button:hover::before {
+  left: 100%;
+}
+
+.bio-button:active {
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+  .speakers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .speaker-card {
+    padding: 32px;
+    gap: 24px;
+  }
+
+  .speaker-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+  }
+
+  .speaker-info {
+    gap: 10px;
+  }
+
+  .bio-button {
+    padding: 10px 20px;
+    border-radius: 14px;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .speakers-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .speaker-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    gap: 24px;
+  }
+
+  .speaker-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 24px;
+  }
+
+  .speaker-info {
+    align-items: center;
+    gap: 12px;
+  }
+
+  .bio-button {
+    padding: 12px 24px;
+    border-radius: 16px;
+    margin-top: 8px;
+  }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .speakers-grid {
+    gap: 48px;
+  }
+
+  .speaker-card {
+    padding: 48px;
+  }
+
+  .speaker-image {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 20px;
+}
+
+.modal-content {
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 40px;
+    background-color: rgba(19, 18, 18, 0.514);
+}
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.modal.show .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(230, 43, 30, 0.03) 0%,
+    transparent 50%,
+    rgba(230, 43, 30, 0.02) 100%
+  );
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#modalTitle {
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#closeModal {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--muted);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  font-size: 18px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+#closeModal:hover {
+  background: rgba(230, 43, 30, 0.2);
+  color: var(--accent-light);
+  transform: scale(1.1);
+}
+
+/* Modal Content Styling */
+#modalBio {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 16px;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile responsive modal */
+@media (max-width: 767px) {
+  .modal {
+    padding: 16px;
+  }
+
+  .modal-card {
+    padding: 24px;
+    width: 95%;
+    max-width: none;
+  }
+
+  #modalTitle {
+    font-size: 20px;
+  }
+
+  #modalBio {
+    font-size: 15px;
+  }
+}
+
+/* Accessibility: Focus outline for keyboard navigation */
+.speaker-card .btn:focus,
+#closeModal:focus {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 2px;
+}
+
+/* Animation for modal content */
+.speaker-modal[style*="flex"] .modal-content {
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
