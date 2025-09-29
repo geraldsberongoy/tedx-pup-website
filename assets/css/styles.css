@@ -87,7 +87,6 @@ h2,
   font-size: clamp(20px, 3vw, 28px);
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: 8px;
   color: var(--white);
 }
 
