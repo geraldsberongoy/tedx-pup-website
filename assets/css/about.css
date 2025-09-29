@@ -1,0 +1,72 @@
+/* ===== ABOUT SECTION ===== */
+#about {
+  padding: 80px 20px;
+}
+
+/* ===== ABOUT LAYOUT ===== */
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-content {
+  width: 100%;
+}
+
+.about-image-container {
+  width: 100%;
+  position: relative;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+  #about {
+    padding: 100px 20px;
+  }
+
+  .about {
+    flex-direction: row;
+    gap: 48px;
+    align-items: flex-start;
+  }
+
+  .about-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .about-image-container {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  #about {
+    padding: 120px 20px;
+  }
+
+  .about {
+    gap: 64px;
+  }
+
+  .about-content {
+    flex: 1.2;
+  }
+
+  .about-image-container {
+    flex: 0.8;
+  }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .about {
+    gap: 80px;
+  }
+}
