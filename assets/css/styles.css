@@ -43,16 +43,18 @@ body {
   color: var(--white);
 }
 
-/* Accessibility Focus States */
-*:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent);
 }
 
-.btn:focus,
-button:focus {
+button:focus,
+input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(230, 43, 30, 0.3);
+
 }
 
 /* Layout Components */
