@@ -56,9 +56,6 @@
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-  #about {
-    padding: 120px 20px;
-  }
 
   .about {
     flex-direction: row;

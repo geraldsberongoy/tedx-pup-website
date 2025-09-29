@@ -10,7 +10,6 @@
   background-attachment: fixed;
   color: var(--white);
   overflow: hidden;
-  padding-bottom: 20px;
 }
 
 .hero::before {
@@ -185,7 +184,7 @@
   margin: 0 auto;
   gap: 40px;
   position: relative;
-  padding: 160px 0px  40px 0px; /* Top padding to account for fixed nav */
+  padding: 120px 0px 40px 0px; /* Top padding to account for fixed nav */
 }
 
 .hero-content h1 {
@@ -673,8 +672,8 @@
     min-height: 100vh;
     justify-content: center;
     gap: 60px;
-    padding: 80px 20px 40px; /* Top padding to account for fixed nav */
     align-items: center;
+    padding: 100px 0px 40px 0px;
   }
 
   .hero-first {
