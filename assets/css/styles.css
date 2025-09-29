@@ -69,3 +69,56 @@ section {
   padding: 80px;
   position: relative;
 }
+
+/* Primary Heading (H1) - Main titles, hero headlines */
+h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 20px 0 16px;
+  color: var(--white);
+}
+
+/* Secondary Heading (H2) - Section titles, main content headings */
+h2,
+.h2 {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+/* Tertiary Heading (H3) - Component headings */
+h3 {
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-top: 0;
+  color: var(--white);
+}
+
+p.lead,
+.lead {
+  color: var(--muted);
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
+
+p {
+  color: var(--white);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* Muted Text - Secondary information, captions, metadata */
+.muted {
+  color: var(--muted);
+}
+
+.muted-small {
+  color: var(--muted);
+  font-size: 13px;
+}
