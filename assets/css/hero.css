@@ -1,0 +1,45 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background-image: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.7)
+    ),
+    url("https://images.unsplash.com/photo-1542744095-291d1f67b221?auto=format&fit=crop&w=1600&q=60");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--white);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(230, 43, 30, 0.1),
+      transparent 70%
+    ),
+    radial-gradient(circle at 80% 70%, rgba(230, 43, 30, 0.05), transparent 70%);
+  pointer-events: none;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  width: 100%;
+}
+.logo {
+  width: 100px;
+}
