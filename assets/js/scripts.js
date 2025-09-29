@@ -179,3 +179,69 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initial check in case page loads scrolled
   handleModernNavScroll();
 });
+
+// Speaker Modal Functionality
+class SpeakerModal {
+  constructor() {
+    this.modal = document.getElementById("modal");
+    this.modalTitle = document.getElementById("modalTitle");
+    this.modalBio = document.getElementById("modalBio");
+    this.closeButton = document.getElementById("closeModal");
+
+    this.init();
+  }
+
+  init() {
+    // Add event listeners to all bio buttons
+    document.querySelectorAll(".speaker-card .btn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        this.openModal(e.target);
+      });
+    });
+
+    // Close modal event listeners
+    this.closeButton.addEventListener("click", () => {
+      this.closeModal();
+    });
+
+    // Close modal when clicking outside
+    this.modal.addEventListener("click", (e) => {
+      if (e.target === this.modal) {
+        this.closeModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && this.modal.classList.contains("show")) {
+        this.closeModal();
+      }
+    });
+  }
+
+  openModal(button) {
+    const speakerCard = button.closest(".speaker-card");
+    const name = speakerCard.dataset.name;
+    const bio = speakerCard.dataset.bio;
+
+    this.modalTitle.textContent = name;
+    this.modalBio.textContent = bio;
+
+    // Show modal with animation
+    this.modal.classList.add("show");
+    document.body.style.overflow = "hidden"; // Prevent background scroll
+
+    // Focus management for accessibility
+    this.closeButton.focus();
+  }
+
+  closeModal() {
+    this.modal.classList.remove("show");
+    document.body.style.overflow = ""; // Restore scroll
+  }
+}
+
+// Initialize speaker modal functionality
+document.addEventListener("DOMContentLoaded", () => {
+  window.speakerModal = new SpeakerModal();
+});
