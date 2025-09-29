@@ -182,8 +182,6 @@
   font-weight: 400;
 }
 
-
-
 .hero-actions {
   display: flex;
   flex-direction: column;
@@ -411,7 +409,6 @@
   }
 }
 
-
 /* Desktop: Horizontal layout */
 @media (min-width: 768px) {
   .hero-content {
@@ -426,8 +423,6 @@
   .hero-actions {
     flex-direction: row;
     width: auto;
-  
-
   }
 
   .hero-actions .btn {
