@@ -37,7 +37,7 @@
   backdrop-filter: none;
   border-bottom: none;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  padding: 0 20px;
+  padding: 0 40px;
 }
 
 /* Modern nav when scrolled */
@@ -185,7 +185,7 @@
   margin: 0 auto;
   gap: 40px;
   position: relative;
-  padding: 160px 20px 40px; /* Top padding to account for fixed nav */
+  padding: 160px 0px  40px 0px; /* Top padding to account for fixed nav */
 }
 
 .hero-content h1 {
