@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
   background-image: linear-gradient(
       135deg,
       rgba(0, 0, 0, 0.5),
@@ -162,11 +161,20 @@
 .hero-content {
   display: flex;
   flex-direction: column;
-  max-width: 800px;
+  max-width: var(--max-width);
   padding-top: 30px;
+  flex: 1;
   margin: 0 auto;
   position: relative;
   gap: 24px;
+}
+
+/* Desktop: Horizontal layout */
+@media (min-width: 768px) {
+  .hero-content {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .hero-content h1 {
@@ -181,7 +189,6 @@
   margin-bottom: 32px;
   font-weight: 400;
 }
-
 
 /* Tablet and Desktop Styles */
 @media (min-width: 768px) {
@@ -221,7 +228,6 @@
   align-items: center;
   flex-wrap: wrap;
   margin-top: 32px;
-
 }
 
 /* Enhanced Hero Buttons */
@@ -301,8 +307,6 @@
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
-
-
 /* Button Ripple Effect */
 .hero-actions .btn {
   position: relative;
@@ -326,33 +330,107 @@
   }
 }
 
-/* Button Loading States */
-.hero-actions .btn:disabled,
-.hero-actions .btn.loading {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none !important;
-}
-
-.hero-actions .btn.loading {
+/* Hero Card */
+.hero-second {
+  width: 100%;
+  min-height: 300px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
+  );
+  border-radius: 20px;
+  padding: 28px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
   position: relative;
+  overflow: hidden;
 }
 
-.hero-actions .btn.loading:after {
+.hero-second::before {
   content: "";
   position: absolute;
-  width: 16px;
-  height: 16px;
-  margin: auto;
-  border: 2px solid transparent;
-  border-top-color: currentColor;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(230, 43, 30, 0.03), transparent 50%);
+  pointer-events: none;
 }
 
+.hero-second:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.hero-second h3 {
+  margin: 0 0 10px;
+}
+
+.hero-second .info {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 32px;
+  color: rgba(255, 255, 255, 0.6);
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.scroll-indicator:hover {
+  color: var(--accent-light);
+}
+
+.hero-countdown {
+  background: linear-gradient(
+    135deg,
+    rgba(230, 43, 30, 0.08),
+    rgba(230, 43, 30, 0.03)
+  );
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(230, 43, 30, 0.15);
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.countdown-unit {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 8px 4px;
+  transition: all 0.3s ease;
+}
+
+.countdown-unit:hover {
+  background: rgba(230, 43, 30, 0.1);
+  transform: translateY(-2px);
+}
+
+.countdown-num {
+  display: block;
+  line-height: 1;
+}
+
+.countdown-label {
+  display: block;
+  margin-top: 4px;
+}
 
 /* Mobile Responsiveness */
 @media (max-width: 480px) {
