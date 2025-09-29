@@ -139,3 +139,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("scroll", requestParallaxTick);
 });
+
+// Modern Sticky Navigation with Black Opacity
+document.addEventListener("DOMContentLoaded", function () {
+  const navContainer = document.querySelector(".nav-container");
+  let lastScrollY = window.pageYOffset;
+
+  function handleModernNavScroll() {
+    const currentScrollY = window.pageYOffset;
+
+    // Add scrolled class when scrolled past 50px
+    if (currentScrollY > 50) {
+      navContainer.classList.add("scrolled");
+    } else {
+      navContainer.classList.remove("scrolled");
+    }
+
+    lastScrollY = currentScrollY;
+  } // Optimize scroll performance with requestAnimationFrame
+  let ticking = false;
+
+  function requestScrollTick() {
+    if (!ticking) {
+      requestAnimationFrame(handleModernNavScroll);
+      ticking = true;
+    }
+  }
+
+  function resetTicking() {
+    ticking = false;
+  }
+
+  // Add scroll listener
+  window.addEventListener("scroll", function () {
+    requestScrollTick();
+    setTimeout(resetTicking, 16); // Reset after one frame (60fps)
+  });
+
+  // Initial check in case page loads scrolled
+  handleModernNavScroll();
+});
