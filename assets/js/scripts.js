@@ -74,3 +74,68 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     }
   });
 });
+
+// Enhanced Button Interactions
+document.addEventListener("DOMContentLoaded", function () {
+  // Button Ripple Effect
+  function createRipple(event) {
+    const button = event.currentTarget;
+    const ripple = document.createElement("span");
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+
+    ripple.style.width = ripple.style.height = size + "px";
+    ripple.style.left = x + "px";
+    ripple.style.top = y + "px";
+    ripple.classList.add("ripple");
+
+    // Remove existing ripples
+    const existingRipple = button.querySelector(".ripple");
+    if (existingRipple) {
+      existingRipple.remove();
+    }
+
+    button.appendChild(ripple);
+
+    // Remove ripple after animation
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
+  }
+
+  // Add ripple effect to hero buttons
+  const heroButtons = document.querySelectorAll(".hero-actions .btn");
+  heroButtons.forEach((button) => {
+    button.addEventListener("click", createRipple);
+  });
+
+  heroButtons.forEach((button) => {
+    button.addEventListener("mouseenter", playHoverSound);
+  });
+
+  // Parallax effect for hero buttons on scroll
+  let ticking = false;
+
+  function updateButtonParallax() {
+    const scrolled = window.pageYOffset;
+    const heroActions = document.querySelector(".hero-actions");
+
+    if (heroActions) {
+      const rate = scrolled * -0.1;
+      heroActions.style.transform = `translateY(${rate}px)`;
+    }
+
+    ticking = false;
+  }
+
+  function requestParallaxTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateButtonParallax);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", requestParallaxTick);
+});

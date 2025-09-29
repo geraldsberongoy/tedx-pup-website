@@ -64,11 +64,12 @@ input:focus {
   padding: 0 20px;
 }
 
-/* Animations */
 section {
   padding: 80px;
   position: relative;
 }
+
+/* Typography */
 
 /* Primary Heading (H1) - Main titles, hero headlines */
 h1 {
@@ -122,3 +123,68 @@ p {
   color: var(--muted);
   font-size: 13px;
 }
+
+/* Buttons */
+.btn {
+  background: var(--accent);
+  color: var(--white);
+  padding: 14px 24px;
+  min-height: 44px; /* Touch-friendly minimum */
+  min-width: 44px; /* Touch-friendly minimum */
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(230, 43, 30, 0.25);
+  border: 0;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+.btn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.btn:hover {
+  background: var(--accent-light);
+  box-shadow: 0 12px 35px rgba(230, 43, 30, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn:hover:before {
+  left: 100%;
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
