@@ -45,7 +45,8 @@
         </nav>
 
         <div class="hero-content">
-          <h1>
+          <div class="hero-first">
+            <h1>
               Ideas worth spreading — PUP Edition<br /><span
                 style="color: var(--accent)"
                 >October 18, 2025</span
@@ -61,6 +62,74 @@
               <a class="btn" href="#tickets">Get Tickets</a>
               <a class="btn ghost" href="#speakers">See Speakers</a>
             </div>
+          </div>
+
+          <div class="hero-second hero-card">
+            <h3 style="margin-bottom: 6px">Event at a glance</h3>
+            <div class="info">
+              Saturday • October 18, 2025<br />Brigade Hall, PUP • Doors open
+              8:00 AM
+            </div>
+
+            <!-- Countdown in Hero -->
+            <div class="hero-countdown" style="margin: 20px 0">
+              <h4
+                style="
+                  margin: 0 0 12px 0;
+                  font-size: 14px;
+                  color: var(--muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                "
+              >
+                Event Countdown
+              </h4>
+              <div class="countdown-grid">
+                <div class="countdown-unit">
+                  <span class="countdown-num" id="days">00</span>
+                  <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-unit">
+                  <span class="countdown-num" id="hours">00</span>
+                  <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-unit">
+                  <span class="countdown-num" id="mins">00</span>
+                  <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-unit">
+                  <span class="countdown-num" id="secs">00</span>
+                  <span class="countdown-label">Seconds</span>
+                </div>
+              </div>
+            </div>
+
+            <hr
+              style="
+                margin: 16px 0;
+                border: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.03);
+              "
+            />
+            <div style="display: flex; gap: 12px; align-items: center">
+              <img
+                src="https://picsum.photos/80/80"
+                alt="speaker"
+                style="
+                  width: 78px;
+                  height: 78px;
+                  border-radius: 10px;
+                  object-fit: cover;
+                "
+              />
+              <div>
+                <div style="font-weight: 700">Keynote: Dr. Maria Santos</div>
+                <div class="muted-small">
+                  The Future of Community-led Innovation
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>

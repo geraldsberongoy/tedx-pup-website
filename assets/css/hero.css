@@ -159,6 +159,30 @@
   background: var(--glass);
 }
 
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  padding-top: 30px;
+  margin: 0 auto;
+  position: relative;
+  gap: 24px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 24px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content .lead {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+
 /* Tablet and Desktop Styles */
 @media (min-width: 768px) {
   .hamburger {
@@ -277,32 +301,7 @@
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 480px) {
-  .hero-actions {
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-  }
 
-  .hero-actions .btn {
-    width: 100%;
-    min-width: auto;
-    justify-content: center;
-    padding: 16px 24px;
-  }
-}
-
-@media (min-width: 481px) and (max-width: 767px) {
-  .hero-actions {
-    gap: 12px;
-  }
-
-  .hero-actions .btn {
-    padding: 16px 28px;
-    font-size: 15px;
-  }
-}
 
 /* Button Ripple Effect */
 .hero-actions .btn {
@@ -325,35 +324,6 @@
     transform: scale(4);
     opacity: 0;
   }
-}
-
-/* Hero Content Enhancements */
-.hero-content {
-  text-align: center;
-  max-width: 800px;
-  padding-top: 30px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.hero-content h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--white) 0%, #f8f9fa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.hero-content .lead {
-  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 32px;
-  font-weight: 400;
 }
 
 /* Button Loading States */
@@ -383,11 +353,30 @@
   transform: translate(-50%, -50%);
 }
 
-@keyframes spin {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
   }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
+
+  .hero-actions .btn {
+    width: 100%;
+    min-width: auto;
+    justify-content: center;
+    padding: 16px 24px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .hero-actions {
+    gap: 12px;
+  }
+
+  .hero-actions .btn {
+    padding: 16px 28px;
+    font-size: 15px;
   }
 }
