@@ -225,9 +225,7 @@
     align-items: center;
   }
 
-  .tickets-form-container {
 
-  }
 
   .ticket-types {
     grid-template-columns: 1fr;
