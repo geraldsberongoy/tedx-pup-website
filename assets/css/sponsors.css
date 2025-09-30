@@ -1,0 +1,385 @@
+/* ===== SPONSORS SECTION ===== */
+
+/* ===== SPONSORS CONTENT LAYOUT ===== */
+.sponsors-content {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* ===== SPONSOR TIERS ===== */
+.sponsors-tier {
+  margin-bottom: 48px;
+}
+
+.tier-title {
+  text-align: center;
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  position: relative;
+}
+
+.tier-title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+/* ===== SPONSORS GRID ===== */
+.sponsors-grid {
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+/* Title Sponsors - 1 column on mobile, 2 on larger screens */
+.title-sponsors {
+  grid-template-columns: 1fr;
+}
+
+/* Gold Sponsors - 1 column on mobile, 3 on larger screens */
+.gold-sponsors {
+  grid-template-columns: 1fr;
+}
+
+/* Silver Sponsors - 2 columns on mobile, 4 on larger screens */
+.silver-sponsors {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Community Partners - 2 columns on mobile, 6 on larger screens */
+.community-sponsors {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* ===== SPONSOR CARDS ===== */
+.sponsor-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(16px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sponsor-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(230, 43, 30, 0.05) 0%,
+    transparent 50%
+  );
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.sponsor-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(230, 43, 30, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(230, 43, 30, 0.2);
+}
+
+.sponsor-card:hover::before {
+  opacity: 1;
+}
+
+/* ===== SPONSOR LOGO STYLING ===== */
+.sponsor-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Black and white filter */
+  filter: grayscale(100%) brightness(1.1) contrast(1.2);
+}
+
+.sponsor-card:hover .sponsor-logo {
+  /* Colored with red tint on hover */
+  filter: grayscale(0%) brightness(1) contrast(1) sepia(0.2) hue-rotate(0deg)
+    saturate(1.2);
+  transform: scale(1.05);
+}
+
+/* ===== SPONSOR CARD SIZES ===== */
+
+/* Large cards for title sponsors */
+.sponsor-card.large {
+  min-height: 120px;
+  max-width: 280px;
+  width: 100%;
+  padding: 24px;
+}
+
+/* Medium cards for gold sponsors */
+.sponsor-card.medium {
+  min-height: 100px;
+  max-width: 220px;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Small cards for silver sponsors */
+.sponsor-card.small {
+  min-height: 80px;
+  max-width: 180px;
+  width: 100%;
+  padding: 16px;
+}
+
+/* Tiny cards for community partners */
+.sponsor-card.tiny {
+  min-height: 60px;
+  max-width: 140px;
+  width: 100%;
+  padding: 12px;
+}
+
+/* ===== SPONSOR CTA SECTION ===== */
+.sponsor-cta {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+}
+
+.sponsor-cta .card {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.sponsor-cta h3 {
+  margin: 0 0 16px 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.sponsor-cta p {
+  margin: 0 0 24px 0;
+  line-height: 1.6;
+}
+
+.sponsor-cta .btn {
+  background: linear-gradient(135deg, var(--accent), #d73b2a);
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.sponsor-cta .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(230, 43, 30, 0.3);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+  .sponsors-content {
+    margin-top: 48px;
+  }
+
+  .sponsors-tier {
+    margin-bottom: 56px;
+  }
+
+  .tier-title {
+    font-size: 24px;
+    margin-bottom: 32px;
+  }
+
+  .sponsors-grid {
+    gap: 24px;
+  }
+
+  /* Title Sponsors */
+  .title-sponsors {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Gold Sponsors */
+  .gold-sponsors {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Silver Sponsors */
+  .silver-sponsors {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* Community Partners */
+  .community-sponsors {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sponsor-card.large {
+    min-height: 140px;
+    max-width: 320px;
+    padding: 32px;
+  }
+
+  .sponsor-card.medium {
+    min-height: 120px;
+    max-width: 260px;
+    padding: 24px;
+  }
+
+  .sponsor-card.small {
+    min-height: 100px;
+    max-width: 200px;
+    padding: 20px;
+  }
+
+  .sponsor-card.tiny {
+    min-height: 80px;
+    max-width: 160px;
+    padding: 16px;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .sponsors-content {
+    margin-top: 64px;
+  }
+
+  .sponsors-tier {
+    margin-bottom: 72px;
+  }
+
+  .tier-title {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .sponsors-grid {
+    gap: 32px;
+  }
+
+  /* Community Partners - 6 columns on desktop */
+  .community-sponsors {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .sponsor-card.large {
+    min-height: 160px;
+    max-width: 360px;
+  }
+
+  .sponsor-card.medium {
+    min-height: 140px;
+    max-width: 280px;
+  }
+
+  .sponsor-card.small {
+    min-height: 120px;
+    max-width: 220px;
+  }
+
+  .sponsor-card.tiny {
+    min-height: 100px;
+    max-width: 180px;
+  }
+
+  .sponsor-cta h3 {
+    font-size: 28px;
+  }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .sponsors-tier {
+    margin-bottom: 80px;
+  }
+
+  .tier-title {
+    font-size: 32px;
+  }
+
+  .sponsors-grid {
+    gap: 40px;
+  }
+}
+
+/* ===== ACCESSIBILITY & INTERACTIONS ===== */
+.sponsor-card:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.sponsor-card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ===== LOADING STATES ===== */
+.sponsor-logo {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sponsor-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.sponsor-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.sponsor-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.sponsor-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.sponsor-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.sponsor-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.sponsor-card:nth-child(6) {
+  animation-delay: 0.6s;
+}

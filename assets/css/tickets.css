@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 40px;
   margin-top: 40px;
+  margin-bottom: 60px;
 }
 
 /* ===== TICKETS INFO SECTION ===== */
@@ -220,7 +221,9 @@
 /* Tablet (768px+) */
 @media (min-width: 768px) {
   .tickets-content {
-    gap: 24px;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
   }
 
   .tickets-info {
@@ -232,6 +235,10 @@
   .ticket-types {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .tickets-form-container{
+    max-width: 600px;
   }
 
   .form-grid {
