@@ -382,3 +382,116 @@ class ScheduleManager {
 document.addEventListener("DOMContentLoaded", () => {
   window.scheduleManager = new ScheduleManager();
 });
+
+// Registration Form Functionality
+class RegistrationManager {
+  constructor() {
+    this.form = document.getElementById("ticketsForm");
+    this.init();
+  }
+
+  init() {
+    // Form submission
+    if (this.form) {
+      this.form.addEventListener("submit", (e) => {
+        this.handleFormSubmit(e);
+      });
+    }
+  }
+
+  async handleFormSubmit(e) {
+    e.preventDefault();
+
+    const submitButton = this.form.querySelector('button[type="submit"]');
+    const btnText = submitButton.querySelector('.btn-text');
+    const btnLoading = submitButton.querySelector('.btn-loading');
+
+    // Show loading state
+    submitButton.classList.add('loading');
+    submitButton.disabled = true;
+    btnLoading.style.display = 'block';
+    btnText.style.display = 'none';
+
+    // Collect form data
+    const formData = new FormData(this.form);
+    const registrationData = Object.fromEntries(formData.entries());
+
+    // Add registration metadata
+    registrationData.eventName = "TEDxPUP 2025";
+    registrationData.eventDate = "October 18, 2025";
+    registrationData.registrationFee = "FREE";
+    registrationData.registrationTime = new Date().toISOString();
+
+    try {
+      // Simulate API call (replace with actual endpoint)
+      await this.simulateRegistration(registrationData);
+      
+      // Show success message
+      this.showSuccessMessage(registrationData);
+      
+      // Reset form
+      this.form.reset();
+      
+    } catch (error) {
+      console.error('Registration failed:', error);
+      this.showErrorMessage('Registration failed. Please try again.');
+    } finally {
+      // Reset button state
+      submitButton.classList.remove('loading');
+      submitButton.disabled = false;
+      btnLoading.style.display = 'none';
+      btnText.style.display = 'block';
+    }
+  }
+
+  async simulateRegistration(data) {
+    // Simulate API delay
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log('Free registration data:', data);
+        resolve(data);
+      }, 2000);
+    });
+  }
+
+  showSuccessMessage(data) {
+    const affiliationLabel = this.getAffiliationLabel(data.affiliation);
+    
+    const message = `Registration Successful! 🎉
+
+Welcome to TEDxPUP 2025, ${data.firstName} ${data.lastName}!
+
+Registration Details:
+• Affiliation: ${affiliationLabel}
+• College: ${data.college || 'Not specified'}
+• Organization: ${data.organization || 'Individual registration'}
+• Event: October 18, 2025 - FREE
+
+A confirmation email with your digital ticket and event details has been sent to ${data.email}.
+
+See you at Brigade Hall, PUP Manila! 🚀`;
+    
+    alert(message);
+  }
+
+  getAffiliationLabel(affiliation) {
+    const labels = {
+      'pup-student': 'PUP Student',
+      'pup-faculty': 'PUP Faculty',
+      'pup-staff': 'PUP Staff',
+      'pup-alumni': 'PUP Alumni',
+      'organization': 'Student Organization',
+      'guest': 'Guest/Visitor'
+    };
+    return labels[affiliation] || affiliation;
+  }
+
+  showErrorMessage(message) {
+    alert(`Error: ${message}`);
+  }
+}
+
+// Initialize registration manager
+document.addEventListener("DOMContentLoaded", () => {
+  window.registrationManager = new RegistrationManager();
+});

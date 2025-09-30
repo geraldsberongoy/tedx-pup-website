@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/about.css" />
     <link rel="stylesheet" href="assets/css/speakers.css" />
     <link rel="stylesheet" href="assets/css/schedule.css" />
+    <link rel="stylesheet" href="assets/css/tickets.css" />
   </head>
   <body>
     <header class="hero">
@@ -322,9 +323,156 @@
         </div>
       </section>
 
-      <section class="container" id="tickets">
-        <h2>Tickets</h2>
-        <p>Find out more about ticket pricing and availability.</p>
+      <section class="container section-overlay" id="tickets">
+        <div class="section-title">
+          <div class="section-title-content">
+            <div class="h2">Register Now</div>
+            <div class="subtitle">Free admission for all PUP students and organizations</div>
+          </div>
+          <div class="section-date-container">
+            <div class="section-date">Limited seats available</div>
+          </div>
+        </div>
+
+        <div class="tickets-content">
+          <div class="tickets-info">
+            <div class="card">
+              <h3>Event Information</h3>
+              <div class="event-details">
+                <div class="detail-item">
+                  <span class="detail-label">Date:</span>
+                  <span class="detail-value">October 18, 2025</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Time:</span>
+                  <span class="detail-value">8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Venue:</span>
+                  <span class="detail-value">Brigade Hall, PUP Manila</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Cost:</span>
+                  <span class="detail-value free-tag">FREE</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Includes:</span>
+                  <span class="detail-value">Welcome kit, lunch, networking session</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tickets-form-container">
+            <form class="tickets-form" id="ticketsForm">
+              <div class="form-header">
+                <h3>Secure Your Spot</h3>
+                <p class="muted">Free registration for the PUP community</p>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="firstName">First Name *</label>
+                  <input type="text" id="firstName" name="firstName" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="lastName">Last Name *</label>
+                  <input type="text" id="lastName" name="lastName" required />
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" />
+                </div>
+
+                <div class="form-group">
+                  <label for="affiliation">Affiliation *</label>
+                  <select id="affiliation" name="affiliation" required>
+                    <option value="">Select your affiliation...</option>
+                    <option value="pup-student">PUP Student</option>
+                    <option value="pup-faculty">PUP Faculty</option>
+                    <option value="pup-staff">PUP Staff</option>
+                    <option value="pup-alumni">PUP Alumni</option>
+                    <option value="organization">Student Organization</option>
+                    <option value="guest">Guest/Visitor</option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="college">College/Department</label>
+                  <select id="college" name="college">
+                    <option value="">Select if applicable...</option>
+                    <option value="coe">College of Engineering</option>
+                    <option value="cla">College of Liberal Arts</option>
+                    <option value="cba">College of Business Administration</option>
+                    <option value="ccis">College of Computer and Information Sciences</option>
+                    <option value="ced">College of Education</option>
+                    <option value="caf">College of Architecture and Fine Arts</option>
+                    <option value="chs">College of Human Sciences</option>
+                    <option value="cs">College of Science</option>
+                    <option value="cot">College of Tourism</option>
+                    <option value="cssd">College of Social Sciences and Development</option>
+                    <option value="claw">College of Law</option>
+                    <option value="graduate">Graduate School</option>
+                    <option value="other">Other Department</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="organization">Organization/Company</label>
+                  <input type="text" id="organization" name="organization" placeholder="If representing an organization" />
+                </div>
+
+                <div class="form-group">
+                  <label for="dietary">Dietary Requirements</label>
+                  <select id="dietary" name="dietary">
+                    <option value="">None</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="halal">Halal</option>
+                    <option value="allergies">Food Allergies (specify in comments)</option>
+                    <option value="other">Other (specify in comments)</option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="expectations">What do you hope to gain from this event?</label>
+                  <textarea id="expectations" name="expectations" rows="3" placeholder="Share your learning goals and expectations..."></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="comments">Additional Comments</label>
+                  <textarea id="comments" name="comments" rows="2" placeholder="Any special requests, accessibility needs, or additional information..."></textarea>
+                </div>
+              </div>
+
+              <div class="form-disclaimer">
+                <div class="disclaimer-box">
+                  <p class="disclaimer-text">
+                    <strong>Free Registration:</strong> This event is completely free for all attendees. 
+                    By registering, you confirm your commitment to attend this inspiring day of ideas and innovation.
+                  </p>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn primary">
+                  <span class="btn-text">Register for Free</span>
+                  <span class="btn-loading" style="display: none;">Processing...</span>
+                </button>
+                <p class="form-note muted">
+                  You will receive a confirmation email with event details and your digital ticket.
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
       </section>
 
       <section class="container" id="sponsors">
