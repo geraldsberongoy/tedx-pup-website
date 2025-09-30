@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="assets/css/hero.css" />
     <link rel="stylesheet" href="assets/css/about.css" />
     <link rel="stylesheet" href="assets/css/speakers.css" />
-    <link rel="stylesheet" href="assets/css/res.css" />
+    <link rel="stylesheet" href="assets/css/schedule.css" />
   </head>
   <body>
     <header class="hero">
@@ -272,9 +272,54 @@
         </div>
       </section>
 
-      <section class="container" id="schedule">
-        <h2>Schedule</h2>
-        <p>Check out the event schedule and plan your day.</p>
+      <section class="container section-overlay" id="schedule">
+        <div class="section-title">
+          <div class="section-title-content">
+            <div class="h2">Schedule</div>
+            <div class="subtitle">
+              Check out the event schedule and plan your day.
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist">
+          <div class="tab active" data-day="1">Day 1</div>
+          <div class="tab" data-day="2">Day 2</div>
+        </div>
+
+        <div class="schedule-container">
+          <div class="schedule-table" id="scheduleTable">
+            <!-- day 1 default -->
+            <div class="row">
+              <div class="time">08:00</div>
+              <div class="session">
+                <strong>Registration</strong> • Doors open & welcome
+              </div>
+            </div>
+            <div class="row">
+              <div class="time">09:00</div>
+              <div class="session">
+                <strong>Opening Remarks</strong> • Organizers
+              </div>
+            </div>
+            <div class="row">
+              <div class="time">09:30</div>
+              <div class="session">
+                <strong>Keynote</strong> • Dr. Maria Santos
+              </div>
+            </div>
+            <div class="row">
+              <div class="time">11:00</div>
+              <div class="session">
+                <strong>Talk Series</strong> • Session A
+              </div>
+            </div>
+            <div class="row">
+              <div class="time">12:30</div>
+              <div class="session"><strong>Lunch Break</strong></div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="container" id="tickets">

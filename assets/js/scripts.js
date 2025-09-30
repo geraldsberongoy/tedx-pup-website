@@ -245,3 +245,135 @@ class SpeakerModal {
 document.addEventListener("DOMContentLoaded", () => {
   window.speakerModal = new SpeakerModal();
 });
+
+/**
+ * Schedule Tab Functionality
+ * Handles switching between different days in the event schedule
+ */
+
+class ScheduleManager {
+  constructor() {
+    this.tabs = document.querySelectorAll(".tab");
+    this.scheduleTable = document.getElementById("scheduleTable");
+
+    // Schedule data for different days
+    this.scheduleData = {
+      1: [
+        ["08:00", "Registration", "Doors open & welcome"],
+        ["09:00", "Opening Remarks", "Welcome from TEDxPUP organizers"],
+        [
+          "09:30",
+          "Keynote",
+          "Dr. Maria Santos - The Future of Community-led Innovation",
+        ],
+        ["10:15", "Coffee Break", "Networking and refreshments"],
+        ["10:45", "Talk Session A", "Jonas dela Cruz - Teaching with Purpose"],
+        [
+          "11:15",
+          "Talk Session B",
+          "Aisha Romero - Open Data for Local Impact",
+        ],
+        ["11:45", "Talk Session C", "Miguel Tan - Storytelling Through Tech"],
+        ["12:30", "Lunch Break", "Networking lunch and sponsor showcase"],
+        ["13:30", "Talk Session D", "Liza Gomez - Designing for Resilience"],
+        ["14:00", "Talk Session E", "Rafael Ortiz - Micro-Enterprise for Good"],
+        [
+          "14:30",
+          "Panel Discussion",
+          "Reimagining Tomorrow: A Community Perspective",
+        ],
+        ["15:30", "Closing Remarks", "Thank you and call to action"],
+        ["16:00", "Networking", "Final networking and photo opportunities"],
+      ],
+      2: [
+        ["08:30", "Registration", "Day 2 check-in"],
+        ["09:00", "Morning Workshops", "Parallel sessions - Choose your track"],
+        ["10:30", "Coffee Break", "Networking and workshop discussions"],
+        [
+          "11:00",
+          "Panel Discussion",
+          "Communities & Technology: Building Bridges",
+        ],
+        ["12:00", "Lunch Break", "Community lunch and informal discussions"],
+        ["13:30", "Student Showcase", "PUP student innovation presentations"],
+        ["14:30", "Interactive Workshop", "Design thinking for social impact"],
+        ["15:30", "Wrap-up Session", "Action planning and next steps"],
+        ["16:00", "Closing Ceremony", "Certificates and group photo"],
+      ],
+    };
+
+    this.init();
+  }
+
+  init() {
+    // Add click listeners to tabs
+    this.tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        this.switchDay(tab.dataset.day);
+        this.setActiveTab(tab);
+      });
+    });
+
+    // Load initial day (Day 1)
+    this.switchDay("1");
+  }
+
+  switchDay(day) {
+    const schedule = this.scheduleData[day];
+    if (!schedule) return;
+
+    // Clear existing content
+    this.scheduleTable.innerHTML = "";
+
+    // Add schedule items with animation
+    schedule.forEach((item, index) => {
+      const row = this.createScheduleRow(item[0], item[1], item[2] || "");
+
+      // Stagger animations for visual appeal
+      setTimeout(() => {
+        this.scheduleTable.appendChild(row);
+        row.style.opacity = "0";
+        row.style.transform = "translateY(20px)";
+
+        // Trigger animation
+        requestAnimationFrame(() => {
+          row.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+          row.style.opacity = "1";
+          row.style.transform = "translateY(0)";
+        });
+      }, index * 50);
+    });
+  }
+
+  createScheduleRow(time, title, description) {
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const timeElement = document.createElement("div");
+    timeElement.className = "time";
+    timeElement.textContent = time;
+
+    const sessionElement = document.createElement("div");
+    sessionElement.className = "session";
+    sessionElement.innerHTML = `<strong>${title}</strong>${
+      description ? " • " + description : ""
+    }`;
+
+    row.appendChild(timeElement);
+    row.appendChild(sessionElement);
+
+    return row;
+  }
+
+  setActiveTab(activeTab) {
+    this.tabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+    activeTab.classList.add("active");
+  }
+}
+
+// Initialize schedule manager
+document.addEventListener("DOMContentLoaded", () => {
+  window.scheduleManager = new ScheduleManager();
+});
