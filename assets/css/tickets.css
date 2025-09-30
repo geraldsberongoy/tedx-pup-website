@@ -214,9 +214,7 @@
 /* Tablet (768px+) */
 @media (min-width: 768px) {
   .tickets-content {
-
     gap: 24px;
-
   }
 
   .tickets-info {
@@ -224,8 +222,6 @@
     justify-content: center;
     align-items: center;
   }
-
-
 
   .ticket-types {
     grid-template-columns: 1fr;
@@ -252,21 +248,35 @@
     min-width: 200px;
   }
 
-  .card{
+  .card {
     max-width: 500px;
   }
 }
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
+  /* Ensure the tickets section allows sticky positioning */
+  #tickets {
+    position: relative;
+    overflow: visible;
+  }
+
   .tickets-content {
     gap: 64px;
     flex-direction: row;
+    align-items: flex-start;
+    position: relative;
   }
 
   .tickets-info {
     max-width: 600px;
-    justify-content: start;
+    position: sticky;
+    top: 100px; /* Adjust based on your navigation height */
+    align-self: flex-start;
+    z-index: 10;
+    /* Ensure the sticky element has proper boundaries */
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
   }
 
   .ticket-types {
