@@ -328,20 +328,19 @@ class ScheduleManager {
     // Add schedule items with animation
     schedule.forEach((item, index) => {
       const row = this.createScheduleRow(item[0], item[1], item[2] || "");
+      row.style.opacity = "0";
+      row.style.transform = "translateY(20px)";
+      row.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+      row.style.transitionDelay = `${index * 50}ms`;
+      this.scheduleTable.appendChild(row);
+    });
 
-      // Stagger animations for visual appeal
-      setTimeout(() => {
-        this.scheduleTable.appendChild(row);
-        row.style.opacity = "0";
-        row.style.transform = "translateY(20px)";
-
-        // Trigger animation
-        requestAnimationFrame(() => {
-          row.style.transition = "opacity 0.3s ease, transform 0.3s ease";
-          row.style.opacity = "1";
-          row.style.transform = "translateY(0)";
-        });
-      }, index * 50);
+    // Trigger animation for all rows in the next frame
+    requestAnimationFrame(() => {
+      Array.from(this.scheduleTable.children).forEach((row) => {
+        row.style.opacity = "1";
+        row.style.transform = "translateY(0)";
+      });
     });
   }
 
