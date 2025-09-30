@@ -1,0 +1,373 @@
+/* ===== TICKETS SECTION ===== */
+
+/* ===== REGISTRATION CONTENT LAYOUT ===== */
+.tickets-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+/* ===== TICKETS INFO SECTION ===== */
+.tickets-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Event Details Card */
+.event-details {
+  margin-top: 20px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.detail-value {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: right;
+}
+
+.free-tag {
+  background: linear-gradient(135deg, #51cf66, #40c057);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== TICKETS FORM ===== */
+.tickets-form-container {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border-radius: 20px;
+  padding: 16px 16px;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tickets-form-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(230, 43, 30, 0.03) 0%,
+    transparent 50%
+  );
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.form-header h3 {
+  margin: 0 0 8px 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.form-header p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* ===== FORM GRID ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(230, 43, 30, 0.1);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--muted);
+}
+
+.form-group option {
+  background: rgba(0, 0, 0, 0.95);
+  color: var(--text-primary);
+}
+/* ===== FORM DISCLAIMER ===== */
+.form-disclaimer {
+  margin-bottom: 24px;
+}
+
+.disclaimer-box {
+  background: linear-gradient(135deg, #51cf66, #40c057);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.disclaimer-text {
+  color: white;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.disclaimer-text strong {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* ===== FORM ACTIONS ===== */
+.form-actions {
+  text-align: center;
+}
+
+.form-actions .btn {
+  width: 100%;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-note {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+  .tickets-content {
+    gap: 24px;
+  }
+
+  .tickets-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ticket-types {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .form-group {
+    min-width: 0; /* Ensures grid items don't overflow */
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .detail-value {
+    text-align: left;
+  }
+
+  .form-actions .btn {
+    width: auto;
+    min-width: 200px;
+  }
+
+  .card {
+    max-width: 500px;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  /* Ensure the tickets section allows sticky positioning */
+  #tickets {
+    position: relative;
+    overflow: visible;
+  }
+
+  .tickets-content {
+    gap: 40px;
+    flex-direction: row;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .tickets-info {
+    max-width: 600px;
+    position: sticky;
+    top: 100px; /* Adjust based on your navigation height */
+    align-self: flex-start;
+    z-index: 10;
+    /* Ensure the sticky element has proper boundaries */
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+
+  .ticket-types {
+    grid-template-columns: 1fr;
+  }
+
+  .tickets-form-container {
+    padding: 40px;
+    max-width: 600px;
+  }
+
+  .form-header h3 {
+    font-size: 28px;
+  }
+
+  .detail-item {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .detail-value {
+    text-align: right;
+  }
+
+  .ticket-type-header h4 {
+    font-size: 20px;
+  }
+
+  .price {
+    font-size: 28px;
+  }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .tickets-content {
+    gap: 80px;
+  }
+
+  .tickets-form-container {
+    padding: 48px;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ticket-type-card:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ===== LOADING STATE ===== */
+.btn.loading .btn-text {
+  opacity: 0;
+}
+
+.btn.loading .btn-loading {
+  display: block;
+}
+
+/* ===== FORM VALIDATION ===== */
+.form-group input:invalid,
+.form-group select:invalid,
+.form-group textarea:invalid {
+  border-color: #ff6b6b;
+}
+
+.form-group input:valid,
+.form-group select:valid,
+.form-group textarea:valid {
+  border-color: #51cf66;
+}
