@@ -354,10 +354,16 @@ class ScheduleManager {
 
     const sessionElement = document.createElement("div");
     sessionElement.className = "session";
-    sessionElement.innerHTML = `<strong>${title}</strong>${
-      description ? " • " + description : ""
-    }`;
 
+    const strongTitle = document.createElement("strong");
+    strongTitle.textContent = title;
+    sessionElement.appendChild(strongTitle);
+    if (description) {
+      const separator = document.createTextNode(" • ");
+      sessionElement.appendChild(separator);
+      const descNode = document.createTextNode(description);
+      sessionElement.appendChild(descNode);
+    }
     row.appendChild(timeElement);
     row.appendChild(sessionElement);
 
