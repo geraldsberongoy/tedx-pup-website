@@ -528,6 +528,154 @@ See you at Brigade Hall, PUP Manila! 🚀`;
 }
 
 /**
+ * Countdown Manager Class
+ * Handles event countdown timer functionality with animations
+ */
+class CountdownManager {
+  constructor() {
+    this.countdownContainer = document.querySelector(".hero-countdown");
+    this.targetDate = new Date("2025-10-18T08:00:00+08:00"); // October 18, 2025, 8:00 AM PHT
+    this.interval = null;
+    this.isRunning = false;
+    
+    this.init();
+  }
+
+  init() {
+    if (!this.countdownContainer) {
+      console.warn("Countdown container not found. Looking for element with class 'hero-countdown'");
+      return;
+    }
+
+    this.cacheElements();
+    this.startCountdown();
+  }
+
+  cacheElements() {
+    // Cache DOM elements based on existing HTML structure
+    this.elements = {
+      days: document.getElementById("days"),
+      hours: document.getElementById("hours"),
+      minutes: document.getElementById("mins"), // Note: HTML uses "mins"
+      seconds: document.getElementById("secs")  // Note: HTML uses "secs"
+    };
+
+    // Verify all elements exist
+    const missingElements = Object.entries(this.elements).filter(([key, element]) => !element);
+    if (missingElements.length > 0) {
+      console.warn("Missing countdown elements:", missingElements.map(([key]) => key));
+    }
+  }
+
+  startCountdown() {
+    if (this.isRunning) return;
+
+    this.isRunning = true;
+    this.updateCountdown(); // Initial update
+    
+    this.interval = setInterval(() => {
+      this.updateCountdown();
+    }, 1000);
+  }
+
+  stopCountdown() {
+    if (this.interval) {
+      clearInterval(this.interval);
+      this.interval = null;
+      this.isRunning = false;
+    }
+  }
+
+  updateCountdown() {
+    const now = new Date().getTime();
+    const distance = this.targetDate.getTime() - now;
+
+    if (distance < 0) {
+      this.handleCountdownEnd();
+      return;
+    }
+
+    const timeLeft = this.calculateTimeLeft(distance);
+    this.updateDisplay(timeLeft);
+  }
+
+  calculateTimeLeft(distance) {
+    return {
+      days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((distance % (1000 * 60)) / 1000)
+    };
+  }
+
+  updateDisplay(timeLeft) {
+    // Update each element with animation
+    this.updateElement(this.elements.days, timeLeft.days);
+    this.updateElement(this.elements.hours, timeLeft.hours);
+    this.updateElement(this.elements.minutes, timeLeft.minutes);
+    this.updateElement(this.elements.seconds, timeLeft.seconds);
+  }
+
+  updateElement(element, value) {
+    if (!element) return;
+
+    const formattedValue = value.toString().padStart(2, '0');
+    
+    if (element.textContent !== formattedValue) {
+      // Add pulse animation for change
+      element.style.transform = 'scale(1.1)';
+      element.style.transition = 'transform 0.2s ease';
+      
+      setTimeout(() => {
+        element.textContent = formattedValue;
+        element.style.transform = 'scale(1)';
+      }, 100);
+    }
+  }
+
+  handleCountdownEnd() {
+    this.stopCountdown();
+    
+    // Display event started message in the existing countdown grid
+    const countdownGrid = this.countdownContainer.querySelector('.countdown-grid');
+    if (countdownGrid) {
+      countdownGrid.innerHTML = `
+        <div class="countdown-ended" style="grid-column: 1 / -1; text-align: center; padding: 20px;">
+          <h3 style="color: var(--accent); margin: 0 0 8px 0;">🎉 TEDxPUP 2025 is Live!</h3>
+          <p style="margin: 0; color: var(--muted); font-size: 14px;">The event has started. Join us for an inspiring experience!</p>
+        </div>
+      `;
+    }
+
+    // Add some celebration animation
+    this.countdownContainer.style.animation = 'pulse 2s infinite';
+  }
+
+  // Public methods for external control
+  setTargetDate(dateString) {
+    this.targetDate = new Date(dateString);
+    if (this.isRunning) {
+      this.stopCountdown();
+      this.startCountdown();
+    }
+  }
+
+  getTimeLeft() {
+    const now = new Date().getTime();
+    const distance = this.targetDate.getTime() - now;
+    
+    if (distance < 0) return null;
+    
+    return this.calculateTimeLeft(distance);
+  }
+
+  restart() {
+    this.stopCountdown();
+    this.startCountdown();
+  }
+}
+
+/**
  * Main Application Class
  * Coordinates all managers and handles initialization
  */
@@ -551,6 +699,7 @@ class TEDxPUPApp {
     this.managers.speakerModal = new SpeakerModalManager();
     this.managers.schedule = new ScheduleManager();
     this.managers.registration = new RegistrationManager();
+    this.managers.countdown = new CountdownManager();
 
     // Make managers globally accessible for debugging
     window.tedxApp = this;
