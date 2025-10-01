@@ -847,8 +847,29 @@ class TEDxPUPApp {
     this.managers.registration = new RegistrationManager();
     this.managers.countdown = new CountdownManager();
 
+    // Initialize scroll animations
+    this.initScrollAnimations();
+
     // Make managers globally accessible for debugging
     window.tedxApp = this;
+  }
+
+  initScrollAnimations() {
+    // Create intersection observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all sections and animatable elements
+    const elementsToAnimate = document.querySelectorAll('section, .speaker-card, .about-card, .sponsor-tier');
+    elementsToAnimate.forEach(el => observer.observe(el));
   }
 
   setupGlobalEventListeners() {
