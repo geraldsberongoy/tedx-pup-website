@@ -180,7 +180,6 @@
 /* Active state styling */
 .nav-links a.active {
   color: var(--accent);
-  box-shadow: 0 4px 16px rgba(230, 43, 30, 0.1);
 }
 
 .nav-links a.active::before {
@@ -255,7 +254,6 @@
     var(--accent-light) 100%
   );
   color: var(--white) !important;
-  box-shadow: 0 8px 24px rgba(230, 43, 30, 0.3);
 }
 
 /* Center CTA button in its container */
@@ -702,10 +700,8 @@
     padding: 8px 16px;
   }
 
-  /* Desktop active state styles */
   .nav-links a.active {
     color: var(--accent);
-    box-shadow: 0 2px 8px rgba(230, 43, 30, 0.15);
   }
 
   .nav-links a.active::before {
@@ -788,7 +784,6 @@
   /* Desktop large active state styles */
   .nav-links a.active {
     color: var(--accent);
-    box-shadow: 0 4px 12px rgba(230, 43, 30, 0.2);
     transform: translateY(-1px);
   }
 
