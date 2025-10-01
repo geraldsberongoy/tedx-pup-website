@@ -505,7 +505,7 @@ A confirmation email with your digital ticket and event details has been sent to
       data.email
     }.
 
-See you at Brigade Hall, PUP Manila! 🚀`;
+See you at Ninoy Aquino, PUP Manila! 🚀`;
 
     alert(message);
   }
