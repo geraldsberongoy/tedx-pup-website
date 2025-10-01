@@ -1,84 +1,165 @@
-// Hamburger Menu Toggle
-document.addEventListener("DOMContentLoaded", function () {
-  const hamburger = document.getElementById("hamburger");
-  const navLinks = document.getElementById("nav-links");
+/**
+ * ==========================================
+ * TEDxPUP EVENT WEBSITE - MAIN SCRIPT
+ * ==========================================
+ * Modern, class-based JavaScript architecture
+ * Mobile-first, accessible, and performant
+ */
 
-  function toggleMenu() {
-    hamburger.classList.toggle("active");
-    navLinks.classList.toggle("active");
+/**
+ * Navigation Manager Class
+ * Handles hamburger menu, smooth scrolling, and sticky navigation
+ */
+class NavigationManager {
+  constructor() {
+    this.hamburger = document.getElementById("hamburger");
+    this.navLinks = document.getElementById("nav-links");
+    this.navContainer = document.querySelector(".nav-container");
+    this.lastScrollY = window.pageYOffset;
+    this.scrollTicking = false;
+
+    this.init();
+  }
+
+  init() {
+    this.setupHamburgerMenu();
+    this.setupSmoothScrolling();
+    this.setupStickyNavigation();
+  }
+
+  setupHamburgerMenu() {
+    if (!this.hamburger || !this.navLinks) return;
+
+    // Toggle menu on hamburger click
+    this.hamburger.addEventListener("click", () => this.toggleMenu());
+
+    // Close menu when clicking on nav links
+    const navLinksItems = this.navLinks.querySelectorAll("a");
+    navLinksItems.forEach((link) => {
+      link.addEventListener("click", () => this.closeMenu());
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (event) =>
+      this.handleOutsideClick(event)
+    );
+
+    // Close menu on escape key
+    document.addEventListener("keydown", (event) => this.handleKeydown(event));
+
+    // Handle window resize
+    window.addEventListener("resize", () => this.handleResize());
+  }
+
+  setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
+    });
+  }
+
+  setupStickyNavigation() {
+    if (!this.navContainer) return;
+
+    window.addEventListener("scroll", () => this.requestScrollTick());
+    this.handleNavScroll(); // Initial check
+  }
+
+  toggleMenu() {
+    this.hamburger.classList.toggle("active");
+    this.navLinks.classList.toggle("active");
 
     // Prevent body scroll when menu is open
-    if (navLinks.classList.contains("active")) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = this.navLinks.classList.contains("active")
+      ? "hidden"
+      : "";
   }
 
-  // Toggle menu on hamburger click
-  if (hamburger) {
-    hamburger.addEventListener("click", toggleMenu);
+  closeMenu() {
+    this.hamburger.classList.remove("active");
+    this.navLinks.classList.remove("active");
+    document.body.style.overflow = "";
   }
 
-  // Close menu when clicking on a nav link
-  const navLinksItems = navLinks.querySelectorAll("a");
-  navLinksItems.forEach((link) => {
-    link.addEventListener("click", () => {
-      hamburger.classList.remove("active");
-      navLinks.classList.remove("active");
-      document.body.style.overflow = "";
-    });
-  });
-
-  // Close menu when clicking outside
-  document.addEventListener("click", function (event) {
+  handleOutsideClick(event) {
     const isClickInsideNav =
-      navLinks.contains(event.target) || hamburger.contains(event.target);
+      this.navLinks.contains(event.target) ||
+      this.hamburger.contains(event.target);
 
-    if (!isClickInsideNav && navLinks.classList.contains("active")) {
-      hamburger.classList.remove("active");
-      navLinks.classList.remove("active");
-      document.body.style.overflow = "";
+    if (!isClickInsideNav && this.navLinks.classList.contains("active")) {
+      this.closeMenu();
     }
-  });
+  }
 
-  // Close menu on escape key
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && navLinks.classList.contains("active")) {
-      hamburger.classList.remove("active");
-      navLinks.classList.remove("active");
-      document.body.style.overflow = "";
+  handleKeydown(event) {
+    if (event.key === "Escape" && this.navLinks.classList.contains("active")) {
+      this.closeMenu();
     }
-  });
+  }
 
-  // Handle window resize
-  window.addEventListener("resize", function () {
+  handleResize() {
     if (window.innerWidth >= 768) {
-      hamburger.classList.remove("active");
-      navLinks.classList.remove("active");
-      document.body.style.overflow = "";
+      this.closeMenu();
     }
-  });
-});
+  }
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+  requestScrollTick() {
+    if (!this.scrollTicking) {
+      requestAnimationFrame(() => this.handleNavScroll());
+      this.scrollTicking = true;
     }
-  });
-});
+  }
 
-// Enhanced Button Interactions
-document.addEventListener("DOMContentLoaded", function () {
-  // Button Ripple Effect
-  function createRipple(event) {
+  handleNavScroll() {
+    const currentScrollY = window.pageYOffset;
+
+    // Add scrolled class when scrolled past 50px
+    if (currentScrollY > 50) {
+      this.navContainer.classList.add("scrolled");
+    } else {
+      this.navContainer.classList.remove("scrolled");
+    }
+
+    this.lastScrollY = currentScrollY;
+    this.scrollTicking = false;
+  }
+}
+
+/**
+ * UI Effects Manager Class
+ * Handles button interactions, ripple effects, and parallax animations
+ */
+class UIEffectsManager {
+  constructor() {
+    this.parallaxTicking = false;
+    this.init();
+  }
+
+  init() {
+    this.setupRippleEffects();
+    this.setupParallaxEffects();
+  }
+
+  setupRippleEffects() {
+    const heroButtons = document.querySelectorAll(".hero-actions .btn");
+    heroButtons.forEach((button) => {
+      button.addEventListener("click", (e) => this.createRipple(e));
+    });
+  }
+
+  setupParallaxEffects() {
+    window.addEventListener("scroll", () => this.requestParallaxTick());
+  }
+
+  createRipple(event) {
     const button = event.currentTarget;
     const ripple = document.createElement("span");
     const rect = button.getBoundingClientRect();
@@ -105,20 +186,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 600);
   }
 
-  // Add ripple effect to hero buttons
-  const heroButtons = document.querySelectorAll(".hero-actions .btn");
-  heroButtons.forEach((button) => {
-    button.addEventListener("click", createRipple);
-  });
+  requestParallaxTick() {
+    if (!this.parallaxTicking) {
+      requestAnimationFrame(() => this.updateButtonParallax());
+      this.parallaxTicking = true;
+    }
+  }
 
-  heroButtons.forEach((button) => {
-    button.addEventListener("mouseenter", playHoverSound);
-  });
-
-  // Parallax effect for hero buttons on scroll
-  let ticking = false;
-
-  function updateButtonParallax() {
+  updateButtonParallax() {
     const scrolled = window.pageYOffset;
     const heroActions = document.querySelector(".hero-actions");
 
@@ -127,61 +202,15 @@ document.addEventListener("DOMContentLoaded", function () {
       heroActions.style.transform = `translateY(${rate}px)`;
     }
 
-    ticking = false;
+    this.parallaxTicking = false;
   }
+}
 
-  function requestParallaxTick() {
-    if (!ticking) {
-      requestAnimationFrame(updateButtonParallax);
-      ticking = true;
-    }
-  }
-
-  window.addEventListener("scroll", requestParallaxTick);
-});
-
-// Modern Sticky Navigation with Black Opacity
-document.addEventListener("DOMContentLoaded", function () {
-  const navContainer = document.querySelector(".nav-container");
-  let lastScrollY = window.pageYOffset;
-
-  function handleModernNavScroll() {
-    const currentScrollY = window.pageYOffset;
-
-    // Add scrolled class when scrolled past 50px
-    if (currentScrollY > 50) {
-      navContainer.classList.add("scrolled");
-    } else {
-      navContainer.classList.remove("scrolled");
-    }
-
-    lastScrollY = currentScrollY;
-  } // Optimize scroll performance with requestAnimationFrame
-  let ticking = false;
-
-  function requestScrollTick() {
-    if (!ticking) {
-      requestAnimationFrame(handleModernNavScroll);
-      ticking = true;
-    }
-  }
-
-  function resetTicking() {
-    ticking = false;
-  }
-
-  // Add scroll listener
-  window.addEventListener("scroll", function () {
-    requestScrollTick();
-    setTimeout(resetTicking, 16); // Reset after one frame (60fps)
-  });
-
-  // Initial check in case page loads scrolled
-  handleModernNavScroll();
-});
-
-// Speaker Modal Functionality
-class SpeakerModal {
+/**
+ * Speaker Modal Manager Class
+ * Handles speaker bio modal functionality with accessibility features
+ */
+class SpeakerModalManager {
   constructor() {
     this.modal = document.getElementById("modal");
     this.modalTitle = document.getElementById("modalTitle");
@@ -192,17 +221,19 @@ class SpeakerModal {
   }
 
   init() {
+    if (!this.modal) return;
+
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
     // Add event listeners to all bio buttons
     document.querySelectorAll(".speaker-card .btn").forEach((button) => {
-      button.addEventListener("click", (e) => {
-        this.openModal(e.target);
-      });
+      button.addEventListener("click", (e) => this.openModal(e.target));
     });
 
     // Close modal event listeners
-    this.closeButton.addEventListener("click", () => {
-      this.closeModal();
-    });
+    this.closeButton?.addEventListener("click", () => this.closeModal());
 
     // Close modal when clicking outside
     this.modal.addEventListener("click", (e) => {
@@ -232,7 +263,7 @@ class SpeakerModal {
     document.body.style.overflow = "hidden"; // Prevent background scroll
 
     // Focus management for accessibility
-    this.closeButton.focus();
+    this.closeButton?.focus();
   }
 
   closeModal() {
@@ -241,23 +272,37 @@ class SpeakerModal {
   }
 }
 
-// Initialize speaker modal functionality
-document.addEventListener("DOMContentLoaded", () => {
-  window.speakerModal = new SpeakerModal();
-});
-
 /**
- * Schedule Tab Functionality
+ * Schedule Manager Class
  * Handles switching between different days in the event schedule
  */
-
 class ScheduleManager {
   constructor() {
     this.tabs = document.querySelectorAll(".tab");
     this.scheduleTable = document.getElementById("scheduleTable");
+    this.scheduleData = this.getScheduleData();
 
-    // Schedule data for different days
-    this.scheduleData = {
+    this.init();
+  }
+
+  init() {
+    if (!this.scheduleTable) return;
+
+    this.setupEventListeners();
+    this.switchDay("1"); // Load initial day
+  }
+
+  setupEventListeners() {
+    this.tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        this.switchDay(tab.dataset.day);
+        this.setActiveTab(tab);
+      });
+    });
+  }
+
+  getScheduleData() {
+    return {
       1: [
         ["08:00", "Registration", "Doors open & welcome"],
         ["09:00", "Opening Remarks", "Welcome from TEDxPUP organizers"],
@@ -301,21 +346,6 @@ class ScheduleManager {
         ["16:00", "Closing Ceremony", "Certificates and group photo"],
       ],
     };
-
-    this.init();
-  }
-
-  init() {
-    // Add click listeners to tabs
-    this.tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        this.switchDay(tab.dataset.day);
-        this.setActiveTab(tab);
-      });
-    });
-
-    // Load initial day (Day 1)
-    this.switchDay("1");
   }
 
   switchDay(day) {
@@ -358,12 +388,14 @@ class ScheduleManager {
     const strongTitle = document.createElement("strong");
     strongTitle.textContent = title;
     sessionElement.appendChild(strongTitle);
+
     if (description) {
       const separator = document.createTextNode(" • ");
       sessionElement.appendChild(separator);
       const descNode = document.createTextNode(description);
       sessionElement.appendChild(descNode);
     }
+
     row.appendChild(timeElement);
     row.appendChild(sessionElement);
 
@@ -378,12 +410,10 @@ class ScheduleManager {
   }
 }
 
-// Initialize schedule manager
-document.addEventListener("DOMContentLoaded", () => {
-  window.scheduleManager = new ScheduleManager();
-});
-
-// Registration Form Functionality
+/**
+ * Registration Manager Class
+ * Handles form submission, validation, and user feedback
+ */
 class RegistrationManager {
   constructor() {
     this.form = document.getElementById("ticketsForm");
@@ -391,12 +421,13 @@ class RegistrationManager {
   }
 
   init() {
-    // Form submission
-    if (this.form) {
-      this.form.addEventListener("submit", (e) => {
-        this.handleFormSubmit(e);
-      });
-    }
+    if (!this.form) return;
+
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    this.form.addEventListener("submit", (e) => this.handleFormSubmit(e));
   }
 
   async handleFormSubmit(e) {
@@ -407,13 +438,35 @@ class RegistrationManager {
     const btnLoading = submitButton.querySelector(".btn-loading");
 
     // Show loading state
-    submitButton.classList.add("loading");
-    submitButton.disabled = true;
-    btnLoading.style.display = "block";
-    btnText.style.display = "none";
+    this.setLoadingState(submitButton, btnText, btnLoading, true);
 
     // Collect form data
     const formData = new FormData(this.form);
+    const registrationData = this.buildRegistrationData(formData);
+
+    try {
+      await this.simulateRegistration(registrationData);
+      this.showSuccessMessage(registrationData);
+      this.form.reset();
+    } catch (error) {
+      console.error("Registration failed:", error);
+      this.showErrorMessage("Registration failed. Please try again.");
+    } finally {
+      this.setLoadingState(submitButton, btnText, btnLoading, false);
+    }
+  }
+
+  setLoadingState(submitButton, btnText, btnLoading, isLoading) {
+    submitButton.classList.toggle("loading", isLoading);
+    submitButton.disabled = isLoading;
+
+    if (btnLoading && btnText) {
+      btnLoading.style.display = isLoading ? "block" : "none";
+      btnText.style.display = isLoading ? "none" : "block";
+    }
+  }
+
+  buildRegistrationData(formData) {
     const registrationData = Object.fromEntries(formData.entries());
 
     // Add registration metadata
@@ -422,25 +475,7 @@ class RegistrationManager {
     registrationData.registrationFee = "FREE";
     registrationData.registrationTime = new Date().toISOString();
 
-    try {
-      // Simulate API call (replace with actual endpoint)
-      await this.simulateRegistration(registrationData);
-
-      // Show success message
-      this.showSuccessMessage(registrationData);
-
-      // Reset form
-      this.form.reset();
-    } catch (error) {
-      console.error("Registration failed:", error);
-      this.showErrorMessage("Registration failed. Please try again.");
-    } finally {
-      // Reset button state
-      submitButton.classList.remove("loading");
-      submitButton.disabled = false;
-      btnLoading.style.display = "none";
-      btnText.style.display = "block";
-    }
+    return registrationData;
   }
 
   async simulateRegistration(data) {
@@ -492,7 +527,59 @@ See you at Brigade Hall, PUP Manila! 🚀`;
   }
 }
 
-// Initialize registration manager
-document.addEventListener("DOMContentLoaded", () => {
-  window.registrationManager = new RegistrationManager();
-});
+/**
+ * Main Application Class
+ * Coordinates all managers and handles initialization
+ */
+class TEDxPUPApp {
+  constructor() {
+    this.managers = {};
+    this.init();
+  }
+
+  init() {
+    document.addEventListener("DOMContentLoaded", () => {
+      this.initializeManagers();
+      this.setupGlobalEventListeners();
+    });
+  }
+
+  initializeManagers() {
+    // Initialize all manager classes
+    this.managers.navigation = new NavigationManager();
+    this.managers.uiEffects = new UIEffectsManager();
+    this.managers.speakerModal = new SpeakerModalManager();
+    this.managers.schedule = new ScheduleManager();
+    this.managers.registration = new RegistrationManager();
+
+    // Make managers globally accessible for debugging
+    window.tedxApp = this;
+  }
+
+  setupGlobalEventListeners() {
+    // Global error handling
+    window.addEventListener("error", (e) => {
+      console.error("Global error:", e.error);
+    });
+
+    // Performance monitoring
+    window.addEventListener("load", () => {
+      console.log("TEDxPUP App loaded successfully");
+    });
+  }
+
+  // Public API for external access
+  getManager(name) {
+    return this.managers[name];
+  }
+
+  // Utility method for debugging
+  debug() {
+    console.log("TEDxPUP App Managers:", this.managers);
+  }
+}
+
+/**
+ * Initialize the application
+ */
+const app = new TEDxPUPApp();
