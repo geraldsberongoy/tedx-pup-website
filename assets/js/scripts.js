@@ -608,7 +608,7 @@ class RegistrationManager {
 
     // Add registration metadata
     registrationData.eventName = "TEDxPUP 2025";
-    registrationData.eventDate = "October 18, 2025";
+    registrationData.eventDate = "October 18-19, 2025";
     registrationData.registrationFee = "FREE";
     registrationData.registrationTime = new Date().toISOString();
 
@@ -636,7 +636,7 @@ Registration Details:
 • Affiliation: ${affiliationLabel}
 • College: ${data.college || "Not specified"}
 • Organization: ${data.organization || "Individual registration"}
-• Event: October 18, 2025 - FREE
+• Event: October 18-19, 2025 - FREE
 
 A confirmation email with your digital ticket and event details has been sent to ${
       data.email
