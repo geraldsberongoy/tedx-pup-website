@@ -102,8 +102,8 @@ This TEDxPUP website serves as a comprehensive platform for the TEDx event at Po
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/geraldsberongoy/aws.git
-   cd aws
+   git clone https://github.com/geraldsberongoy/tedx-pup-website.git
+   cd tedx-pup-website
    ```
 
 2. **Serve locally** (choose one method):
