@@ -537,13 +537,15 @@ class CountdownManager {
     this.targetDate = new Date("2025-10-18T08:00:00+08:00"); // October 18, 2025, 8:00 AM PHT
     this.interval = null;
     this.isRunning = false;
-    
+
     this.init();
   }
 
   init() {
     if (!this.countdownContainer) {
-      console.warn("Countdown container not found. Looking for element with class 'hero-countdown'");
+      console.warn(
+        "Countdown container not found. Looking for element with class 'hero-countdown'"
+      );
       return;
     }
 
@@ -557,13 +559,18 @@ class CountdownManager {
       days: document.getElementById("days"),
       hours: document.getElementById("hours"),
       minutes: document.getElementById("mins"), // Note: HTML uses "mins"
-      seconds: document.getElementById("secs")  // Note: HTML uses "secs"
+      seconds: document.getElementById("secs"), // Note: HTML uses "secs"
     };
 
     // Verify all elements exist
-    const missingElements = Object.entries(this.elements).filter(([key, element]) => !element);
+    const missingElements = Object.entries(this.elements).filter(
+      ([key, element]) => !element
+    );
     if (missingElements.length > 0) {
-      console.warn("Missing countdown elements:", missingElements.map(([key]) => key));
+      console.warn(
+        "Missing countdown elements:",
+        missingElements.map(([key]) => key)
+      );
     }
   }
 
@@ -572,7 +579,7 @@ class CountdownManager {
 
     this.isRunning = true;
     this.updateCountdown(); // Initial update
-    
+
     this.interval = setInterval(() => {
       this.updateCountdown();
     }, 1000);
@@ -604,7 +611,7 @@ class CountdownManager {
       days: Math.floor(distance / (1000 * 60 * 60 * 24)),
       hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
       minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((distance % (1000 * 60)) / 1000)
+      seconds: Math.floor((distance % (1000 * 60)) / 1000),
     };
   }
 
@@ -619,25 +626,26 @@ class CountdownManager {
   updateElement(element, value) {
     if (!element) return;
 
-    const formattedValue = value.toString().padStart(2, '0');
-    
+    const formattedValue = value.toString().padStart(2, "0");
+
     if (element.textContent !== formattedValue) {
       // Add pulse animation for change
-      element.style.transform = 'scale(1.1)';
-      element.style.transition = 'transform 0.2s ease';
-      
+      element.style.transform = "scale(1.1)";
+      element.style.transition = "transform 0.2s ease";
+
       setTimeout(() => {
         element.textContent = formattedValue;
-        element.style.transform = 'scale(1)';
+        element.style.transform = "scale(1)";
       }, 100);
     }
   }
 
   handleCountdownEnd() {
     this.stopCountdown();
-    
+
     // Display event started message in the existing countdown grid
-    const countdownGrid = this.countdownContainer.querySelector('.countdown-grid');
+    const countdownGrid =
+      this.countdownContainer.querySelector(".countdown-grid");
     if (countdownGrid) {
       countdownGrid.innerHTML = `
         <div class="countdown-ended" style="grid-column: 1 / -1; text-align: center; padding: 20px;">
@@ -648,7 +656,7 @@ class CountdownManager {
     }
 
     // Add some celebration animation
-    this.countdownContainer.style.animation = 'pulse 2s infinite';
+    this.countdownContainer.style.animation = "pulse 2s infinite";
   }
 
   // Public methods for external control
@@ -663,9 +671,9 @@ class CountdownManager {
   getTimeLeft() {
     const now = new Date().getTime();
     const distance = this.targetDate.getTime() - now;
-    
+
     if (distance < 0) return null;
-    
+
     return this.calculateTimeLeft(distance);
   }
 
