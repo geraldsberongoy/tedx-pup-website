@@ -186,6 +186,7 @@ aws/
 - **Challenge**: Frontend Developer Challenge: Freestyle Edition
 - **Institution**: Polytechnic University of the Philippines (PUP)
 - **Design Inspiration**: TEDx official branding guidelines
+- **Logo Creation**: [TEDx Logo Generator](https://landing-pages.ted.com/tedx-logo-generator/index.html)
 - **Images**: [picsum.photos](https://picsum.photos/) placeholder service
 
 ---
