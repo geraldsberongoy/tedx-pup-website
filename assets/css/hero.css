@@ -169,11 +169,32 @@
   padding: 15px 20px;
   border-radius: 8px;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .nav-links a:hover {
   color: var(--accent);
   background: var(--glass);
+}
+
+/* Active state styling */
+.nav-links a.active {
+  color: var(--accent);
+  background: linear-gradient(135deg, rgba(230, 43, 30, 0.15), rgba(230, 43, 30, 0.08));
+  border: 1px solid rgba(230, 43, 30, 0.2);
+  box-shadow: 0 4px 16px rgba(230, 43, 30, 0.1);
+}
+
+.nav-links a.active::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  border-radius: 1px;
 }
 
 /* ===== HERO CONTENT ===== */
@@ -609,6 +630,20 @@
     padding: 8px 16px;
   }
 
+  /* Desktop active state styles */
+  .nav-links a.active {
+    color: var(--accent);
+    background: rgba(230, 43, 30, 0.1);
+    border: 1px solid rgba(230, 43, 30, 0.2);
+    box-shadow: 0 2px 8px rgba(230, 43, 30, 0.15);
+  }
+
+  .nav-links a.active::before {
+    bottom: -2px;
+    width: 20px;
+    height: 2px;
+  }
+
   /* Hero Content  */
   .hero-content {
     justify-content: center;
@@ -664,6 +699,21 @@
   .nav-links a {
     font-size: 18px;
     padding: 10px 20px;
+  }
+
+  /* Desktop large active state styles */
+  .nav-links a.active {
+    color: var(--accent);
+    background: rgba(230, 43, 30, 0.12);
+    border: 1px solid rgba(230, 43, 30, 0.25);
+    box-shadow: 0 4px 12px rgba(230, 43, 30, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .nav-links a.active::before {
+    bottom: -2px;
+    width: 24px;
+    height: 2px;
   }
 
   /* Hero Content - Desktop: First section bigger */

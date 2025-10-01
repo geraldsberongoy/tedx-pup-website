@@ -8,7 +8,7 @@
 
 /**
  * Navigation Manager Class
- * Handles hamburger menu, smooth scrolling, and sticky navigation
+ * Handles hamburger menu, smooth scrolling, sticky navigation, and active states
  */
 class NavigationManager {
   constructor() {
@@ -17,6 +17,9 @@ class NavigationManager {
     this.navContainer = document.querySelector(".nav-container");
     this.lastScrollY = window.pageYOffset;
     this.scrollTicking = false;
+    this.navLinkElements = document.querySelectorAll(".nav-links a");
+    this.sections = [];
+    this.observer = null;
 
     this.init();
   }
@@ -25,6 +28,8 @@ class NavigationManager {
     this.setupHamburgerMenu();
     this.setupSmoothScrolling();
     this.setupStickyNavigation();
+    this.setupActiveStates();
+    this.setupIntersectionObserver();
   }
 
   setupHamburgerMenu() {
@@ -71,6 +76,68 @@ class NavigationManager {
 
     window.addEventListener("scroll", () => this.requestScrollTick());
     this.handleNavScroll(); // Initial check
+  }
+
+  setupActiveStates() {
+    // Get all sections that have corresponding nav links
+    this.navLinkElements.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        const sectionId = href.substring(1);
+        const section = document.getElementById(sectionId);
+        if (section) {
+          this.sections.push({
+            id: sectionId,
+            element: section,
+            navLink: link,
+          });
+        }
+      }
+    });
+
+    // Add click handlers for immediate active state
+    this.navLinkElements.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        this.setActiveLink(link);
+      });
+    });
+  }
+
+  setupIntersectionObserver() {
+    // Create intersection observer to detect which section is in view
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -60% 0px", // Trigger when section is 20% from top
+      threshold: 0,
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionData = this.sections.find(
+            (s) => s.id === entry.target.id
+          );
+          if (sectionData) {
+            this.setActiveLink(sectionData.navLink);
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    this.sections.forEach((section) => {
+      this.observer.observe(section.element);
+    });
+  }
+
+  setActiveLink(activeLink) {
+    // Remove active class from all nav links
+    this.navLinkElements.forEach((link) => {
+      link.classList.remove("active");
+    });
+
+    // Add active class to the current link
+    activeLink.classList.add("active");
   }
 
   toggleMenu() {
@@ -130,6 +197,21 @@ class NavigationManager {
 
     this.lastScrollY = currentScrollY;
     this.scrollTicking = false;
+  }
+
+  // Public method to manually set active link
+  setActiveLinkById(sectionId) {
+    const sectionData = this.sections.find((s) => s.id === sectionId);
+    if (sectionData) {
+      this.setActiveLink(sectionData.navLink);
+    }
+  }
+
+  // Cleanup method
+  destroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 }
 
