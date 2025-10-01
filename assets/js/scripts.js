@@ -671,7 +671,8 @@ See you at Ninoy Aquino, PUP Manila! 🚀`;
 class CountdownManager {
   constructor() {
     this.countdownContainer = document.querySelector(".hero-countdown");
-    this.targetDate = new Date("2025-10-18T08:00:00+08:00"); // October 18, 2025, 8:00 AM PHT
+    // Create target date more reliably for cross-browser compatibility
+    this.targetDate = new Date(2025, 9, 18, 8, 0, 0); // October 18, 2025, 8:00 AM (month is 0-indexed)
     this.interval = null;
     this.isRunning = false;
 
