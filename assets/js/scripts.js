@@ -121,7 +121,7 @@ class NavigationManager {
           // Check if this section is more at the top than others
           const rect = entry.boundingClientRect;
           const distanceFromTop = Math.abs(rect.top);
-          
+
           if (!topMostSection || distanceFromTop < topMostRatio) {
             topMostSection = entry.target.id;
             topMostRatio = distanceFromTop;
@@ -131,7 +131,7 @@ class NavigationManager {
 
       // Only set active if we found a clear top section
       if (topMostSection) {
-        const sectionData = this.sections.find(s => s.id === topMostSection);
+        const sectionData = this.sections.find((s) => s.id === topMostSection);
         if (sectionData) {
           this.setActiveLink(sectionData.navLink);
         }
@@ -144,27 +144,30 @@ class NavigationManager {
     });
 
     // Separate observer for hero section detection with more specific criteria
-    const heroSection = document.querySelector('.hero');
+    const heroSection = document.querySelector(".hero");
     if (heroSection) {
-      const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          // Only clear active states if hero is substantially visible (more than 50%)
-          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-            this.clearActiveLinks();
-          }
-        });
-      }, {
-        root: null,
-        rootMargin: "0px 0px -20% 0px", // Give some buffer at the bottom
-        threshold: 0.5 // Hero must be at least 50% visible
-      });
-      
+      const heroObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Only clear active states if hero is substantially visible (more than 50%)
+            if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+              this.clearActiveLinks();
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: "0px 0px -20% 0px", // Give some buffer at the bottom
+          threshold: 0.5, // Hero must be at least 50% visible
+        }
+      );
+
       heroObserver.observe(heroSection);
     }
 
     // Additional scroll-based check for when we're at the very top
     let scrollTimeout;
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         // If we're at the very top of the page, clear active states
