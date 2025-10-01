@@ -153,7 +153,7 @@ aws/
 
 ## Live Demo
 
-🚀 **Live Site**: [https://geraldsberongoy.github.io/aws/](https://geraldsberongoy.github.io/aws/)
+🚀 **Live Site**: [https://geraldsberongoy.github.io/tedx-pup-website/](https://geraldsberongoy.github.io/tedx-pup-website/)
 
 > **Note**: If deploying to a different platform (Netlify, Vercel), update the link above.
 
