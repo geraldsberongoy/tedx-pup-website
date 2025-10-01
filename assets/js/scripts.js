@@ -104,29 +104,74 @@ class NavigationManager {
   }
 
   setupIntersectionObserver() {
-    // Create intersection observer to detect which section is in view
+    // Create intersection observer to detect which section is at the top of viewport
     const observerOptions = {
       root: null,
-      rootMargin: "-20% 0px -60% 0px", // Trigger when section is 20% from top
+      rootMargin: "-10% 0px -90% 0px", // Only trigger when section is near the top
       threshold: 0,
     };
 
     this.observer = new IntersectionObserver((entries) => {
+      // Find the section that's most prominently at the top
+      let topMostSection = null;
+      let topMostRatio = 0;
+
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const sectionData = this.sections.find(
-            (s) => s.id === entry.target.id
-          );
-          if (sectionData) {
-            this.setActiveLink(sectionData.navLink);
+          // Check if this section is more at the top than others
+          const rect = entry.boundingClientRect;
+          const distanceFromTop = Math.abs(rect.top);
+          
+          if (!topMostSection || distanceFromTop < topMostRatio) {
+            topMostSection = entry.target.id;
+            topMostRatio = distanceFromTop;
           }
         }
       });
+
+      // Only set active if we found a clear top section
+      if (topMostSection) {
+        const sectionData = this.sections.find(s => s.id === topMostSection);
+        if (sectionData) {
+          this.setActiveLink(sectionData.navLink);
+        }
+      }
     }, observerOptions);
 
     // Observe all sections
     this.sections.forEach((section) => {
       this.observer.observe(section.element);
+    });
+
+    // Separate observer for hero section detection with more specific criteria
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          // Only clear active states if hero is substantially visible (more than 50%)
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            this.clearActiveLinks();
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: "0px 0px -20% 0px", // Give some buffer at the bottom
+        threshold: 0.5 // Hero must be at least 50% visible
+      });
+      
+      heroObserver.observe(heroSection);
+    }
+
+    // Additional scroll-based check for when we're at the very top
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        // If we're at the very top of the page, clear active states
+        if (window.pageYOffset < 100) {
+          this.clearActiveLinks();
+        }
+      }, 100);
     });
   }
 
@@ -138,6 +183,13 @@ class NavigationManager {
 
     // Add active class to the current link
     activeLink.classList.add("active");
+  }
+
+  clearActiveLinks() {
+    // Remove active class from all nav links
+    this.navLinkElements.forEach((link) => {
+      link.classList.remove("active");
+    });
   }
 
   toggleMenu() {
