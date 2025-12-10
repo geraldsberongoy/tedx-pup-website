@@ -116,7 +116,7 @@ This TEDxPUP website serves as a comprehensive platform for the TEDx event at Po
    npx http-server
 
    # Option 3: VS Code Live Server extension
-   # Right-click index.html → "Open with Live Server"
+   Right-click index.html → "Open with Live Server"
    ```
 
 3. **Open in browser:**
@@ -154,8 +154,6 @@ aws/
 ## Live Demo
 
 🚀 **Live Site**: [https://geraldsberongoy.github.io/tedx-pup-website/](https://geraldsberongoy.github.io/tedx-pup-website/)
-
-> **Note**: If deploying to a different platform (Netlify, Vercel), update the link above.
 
 ## Development Process
 
